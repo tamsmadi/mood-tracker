@@ -1,0 +1,119 @@
+.moodList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Horizontal: 2-3 cols desktop, adapts */
+  gap: 20px; /* Airy spacing between cards */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  max-width: 1000px; /* Caps grid sprawl */
+}
+
+.moodCard {
+  display: flex;
+  flex-direction: column;
+  gap: 12px; /* Internal card breathing room */
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.95); /* Semi-translucent over bg */
+  border-radius: 20px; /* Rounded for modern interest */
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06); /* Soft, interesting shadow */
+  border: 1px solid transparent;
+  background-clip: padding-box;
+  transition: all 0.3s ease; /* Smooth hovers */
+  position: relative;
+  overflow: hidden; /* For gradient border trick */
+}
+
+.moodCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(135deg, #0ea5e9, #10b981, #f59e0b, #ef4444); /* Rainbow mood border for fun */
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: xor;
+  -webkit-mask-composite: xor;
+  z-index: -1;
+}
+
+.moodCard:hover {
+  transform: translateY(-4px) scale(1.02); /* Interesting lift + subtle zoom */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.moodInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px; /* Comfy read flow */
+  flex: 1;
+}
+
+.idRating {
+  font-size: 0.95rem;
+  color: #64748b; /* Muted for secondary info */
+  font-family: monospace; /* Code-like for ID/rating */
+}
+
+.moodLabel {
+  font-size: 1.3rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Emoji space */
+  /* Base, overridden by mood classes below */
+}
+
+.moodLabel::before {
+  font-size: 1.5rem; /* Bigger emoji for interest */
+}
+
+.timestamp {
+  font-size: 0.85rem;
+  color: #94a3b8;
+  font-style: italic;
+}
+
+.deleteBtn {
+  align-self: flex-start; /* Aligns to card edge */
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(239, 68, 68, 0.3);
+}
+
+.deleteBtn:hover {
+  background: linear-gradient(135deg, #dc2626, #b91c1c);
+  transform: scale(1.05);
+}
+
+/* Mood-specific colors for labels (interesting variance) */
+.moodLabel.terrible { color: #ef4444; } /* Red */
+.moodLabel.bad { color: #f59e0b; } /* Amber */
+.moodLabel.okay { color: #eab308; } /* Yellow */
+.moodLabel.good { color: #10b981; } /* Emerald */
+.moodLabel.excellent { color: #059669; } /* Teal */
+
+/* Mobile: Stack to vertical for comfort */
+@media (max-width: 768px) {
+  .moodList {
+    grid-template-columns: 1fr; /* Single column, no horizontal squeeze */
+    gap: 12px;
+  }
+  .moodCard {
+    text-align: center; /* Centered details */
+  }
+  .deleteBtn {
+    align-self: center;
+    width: 100%; /* Full-width button on small */
+  }
+}

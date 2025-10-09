@@ -1,0 +1,32 @@
+.pageContainer {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 50%, #ffffff 100%); /* Elegant fade: cyan to white for airy feel */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Top-aligned, grows with content */
+  padding: 20px;
+  gap: 32px; /* Generous space between title/slider/list */
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; /* Clean system font */
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #0ea5e9; /* Vibrant blue for "mood" pop */
+  text-align: center;
+  margin: 0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); /* Subtle depth */
+}
+
+/* Empty state styling for no moods */
+.noMoods {
+  text-align: center;
+  color: #6b7280;
+  font-size: 1.1rem;
+  font-style: italic;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
