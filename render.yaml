@@ -1,25 +1,31 @@
 services:
+  # Backend: FastAPI service with Python runtime
   - type: web
-    name: fastapi-backend
-    rootDir: frontend/
+    name: mood-tracker-backend
     env: python
-    buildCommand: "pip install -r requirements.txt"
-    startCommand: "uvicorn app.main:app --reload"
-    plan: free
-    autoDeploy: true
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
     envVars:
-      - key: PORT
-        value: 8000
+      - key: PYTHON_VERSION
+        value: 3.12.0
+    plan: free  # Free tier for starters
 
+  # Frontend: Next.js static site (optimizes for production builds)
   - type: web
-    name: nextjs-frontend
-    rootDir: backend/
+    name: mood-tracker-frontend
     env: node
-    buildCommand: "npm install && npm run build"
-    startCommand: "npm run dev"
-    plan: free
-    autoDeploy: true
+    buildCommand: npm install && npm run build
+    startCommand: npm run start
     envVars:
-      - key: PORT
-        value: 3000
-        
+      - key: NODE_VERSION
+        value: 18.17.0
+      - key: NEXT_PUBLIC_API_URL
+        value: https://mood-tracker-backend.onrender.com  # Points to backend service
+    plan: free  # Free tier
+
+# Optional: Environment setup (shared if needed)
+envVars:
+  - key: CORS_ORIGINS
+    fromDatabase:
+      name: mood-tracker-db
+      property: cors.origins  # If you add a DB service later
