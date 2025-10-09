@@ -24,3 +24,5 @@ services:
     envVars:
       - key: PORT
         value: 3000
+      - key: NEXT_PUBLIC_API_URL
+        value: https://mood-tracker-backend.onrender.com
