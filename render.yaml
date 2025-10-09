@@ -22,5 +22,5 @@ services:
     plan: free
     autoDeploy: true
     envVars:
-      - key: NODE_ENV
-        value: production
+      - key: PORT
+        value: 3000
