@@ -5,6 +5,11 @@ from .data_manager import init_db, add_mood, get_all_moods, get_recent_moods, de
 
 app = FastAPI()
 
+origins = [
+    "https://mood-tracker-frontend.onrender.com",  # your deployed frontend
+    "http://localhost:3000"  # for local development
+]
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:3000"],  # Your Next.js frontend
