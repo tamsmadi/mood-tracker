@@ -26,13 +26,13 @@ export default function Home() {
       }
     }
   }
-  function onMoodAdded(newMood) {
-    if (newMood) {
-      setMoods((prev) => [newMood, ...prev]); // Optimistic add
-    } else {
-      loadMoods(); // Full reload
-    }
-  }
+  // function onMoodAdded(newMood) {
+  //   if (newMood) {
+  //     setMoods((prev) => [newMood, ...prev]); // Optimistic add
+  //   } else {
+  //     loadMoods(); // Full reload
+  //   }
+  // }
   useEffect(() => {
     loadMoods();
   }, []);

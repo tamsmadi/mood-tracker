@@ -1,9 +1,15 @@
 "use client";
 import React, { useState } from "react";
 import { api } from "../lib/api";
-import styles from "./slider.module.css"; // Critical: Import here (case-sensitive)
-import { getMoodLabel } from "../lib/api"; // Import the new function
+import styles from "./slider.module.css"; // Critical: Import here (case-sensitive); 
 export default function Slider({ onMoodAdded }) {
+  const getMoodLabel = (rating) => {
+  if (rating <= 2) return "terrible";
+  if (rating <= 4) return "bad";
+  if (rating <= 6) return "okay";
+  if (rating <= 8) return "good";
+  return "excellent";  // 9-10
+};
   const [moodRating, setMoodRating] = useState(1);
 
   const handleChange = (event) => {
@@ -31,7 +37,6 @@ export default function Slider({ onMoodAdded }) {
 
   return (
     <div className={styles.sliderContainer}>
-      {" "}
       {/* Root wrapper: This makes the box */}
       <input
         type="range"
@@ -41,11 +46,11 @@ export default function Slider({ onMoodAdded }) {
         onChange={handleChange}
         className={styles.rangeInput}
       />
-      <span className={styles.valueLabel}>Value: {moodRating}</span>{" "}
+      <span className={styles.valueLabel}>Value: {moodRating}</span>
       {/* Boxed value */}
       <button onClick={handleSubmit} className={styles.submitBtn}>
         Submit Mood
-      </button>{" "}
+      </button>
       {/* Gradient button */}
     </div>
   );
