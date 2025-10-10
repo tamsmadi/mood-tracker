@@ -26,7 +26,6 @@ export default function Slider({ onMoodAdded }) {
     onMoodAdded(newMood); // Optimistic UI update
 
     try {
-      console.log("About to call API...");
       await api.addMoods({ mood_rating: moodRating });
       onMoodAdded(); // Reload list
     } catch (error) {
