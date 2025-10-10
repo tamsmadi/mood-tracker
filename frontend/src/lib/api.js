@@ -16,10 +16,6 @@ const fetchMoods = async () => {
   return response.json();
 };
 
-const getMoodLabel = async () => {
-  const response = await fetch(`${API_BASE_URL}/mood-labels`);
-  return response.json();
-}
 
 const deleteMood = async (moodId) => {
   const response = await fetch(`${API_BASE_URL}/moods/${moodId}`, {
