@@ -16,6 +16,10 @@ const fetchMoods = async () => {
   return response.json();
 };
 
+const getMoodLabel = async () => {
+  const response = await fetch(`${API_BASE_URL}/mood-labels`);
+  return response.json();
+}
 
 const deleteMood = async (moodId) => {
   const response = await fetch(`${API_BASE_URL}/moods/${moodId}`, {
@@ -32,6 +36,7 @@ const fetchRecentMoods = async (days = 7) => {
 export const api = {
   addMoods,
   fetchMoods,
+  getMoodLabel,
   deleteMood,
   fetchRecentMoods,
 };

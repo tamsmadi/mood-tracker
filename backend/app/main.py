@@ -12,7 +12,7 @@ origins = [
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Your Next.js frontend
+    allow_origins=["https://your-frontend.onrender.com", "http://localhost:3000"],  # Your Next.js frontend
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

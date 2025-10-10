@@ -26,9 +26,7 @@ export default function MoodList({ moods, onMoodDelete }) {
               <span className={styles.idRating}>
                 ID: {mood.id} | Rating: {mood.mood_rating}
               </span>
-              <span
-                className={styles.moodLabel} 
-              >
+              <span className={styles.moodLabel}>
                 {getMoodEmoji(mood.mood_label)} {mood.mood_label}
               </span>
               <span className={styles.timestamp}>

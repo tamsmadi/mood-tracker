@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import { api } from "../lib/api";
-import styles from './slider.module.css';  // Critical: Import here (case-sensitive)
-
+import styles from "./slider.module.css"; // Critical: Import here (case-sensitive)
+import { getMoodLabel } from "../lib/api"; // Import the new function
 export default function Slider({ onMoodAdded }) {
   const [moodRating, setMoodRating] = useState(1);
 
@@ -11,14 +11,18 @@ export default function Slider({ onMoodAdded }) {
   };
 
   const handleSubmit = async () => {
-    console.log("=== BUTTON CLICKED ===");
-    console.log("moodRating value:", moodRating);
-    console.log("moodRating type:", typeof moodRating);
+    const newMood = {
+      id: Date.now(),
+      mood_rating: moodRating,
+      mood_label: getMoodLabel(moodRating), // Placeholder for mood label
+      date: new Date().toISOString(),
+    };
+    onMoodAdded(newMood); // Optimistic UI update
 
     try {
       console.log("About to call API...");
       await api.addMoods({ mood_rating: moodRating });
-      onMoodAdded();  // Reload list
+      onMoodAdded(); // Reload list
     } catch (error) {
       console.log("ERROR caught:", error);
       console.log("Error message:", error.message);
@@ -26,17 +30,23 @@ export default function Slider({ onMoodAdded }) {
   };
 
   return (
-    <div className={styles.sliderContainer}>  {/* Root wrapper: This makes the box */}
+    <div className={styles.sliderContainer}>
+      {" "}
+      {/* Root wrapper: This makes the box */}
       <input
         type="range"
         min="1"
         max="10"
         value={moodRating}
         onChange={handleChange}
-        className={styles.rangeInput}  
+        className={styles.rangeInput}
       />
-      <span className={styles.valueLabel}>Value: {moodRating}</span>  {/* Boxed value */}
-      <button onClick={handleSubmit} className={styles.submitBtn}>Submit Mood</button>  {/* Gradient button */}
+      <span className={styles.valueLabel}>Value: {moodRating}</span>{" "}
+      {/* Boxed value */}
+      <button onClick={handleSubmit} className={styles.submitBtn}>
+        Submit Mood
+      </button>{" "}
+      {/* Gradient button */}
     </div>
   );
 }
