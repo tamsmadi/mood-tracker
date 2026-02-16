@@ -1,4 +1,4 @@
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://mood-tracker-frontend-kqew.onrender.com/";
 
 const addMoods = async (moodData) => {
   const response = await fetch(`${API_BASE_URL}/moods`, {
@@ -15,6 +15,11 @@ const fetchMoods = async () => {
   const response = await fetch(`${API_BASE_URL}/moods`);
   return response.json();
 };
+
+const getMoodLabel = async (rating) => {
+  const response = await fetch(`${API_BASE_URL}/moods/label?rating=${rating}`);
+  return response.json();
+}
 
 
 const deleteMood = async (moodId) => {
